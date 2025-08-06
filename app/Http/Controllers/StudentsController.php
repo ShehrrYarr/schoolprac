@@ -93,4 +93,7 @@ class StudentsController extends Controller
         $student->delete();
         return redirect()->back()->with('success', 'Student Deleted Successfully');
     }
+    public function heloWorld(){
+        return view('heloWorld');
+    }
 }
