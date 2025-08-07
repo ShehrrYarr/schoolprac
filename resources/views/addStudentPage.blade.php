@@ -40,7 +40,13 @@
   </div>
   <div class="form-group">
     <label for="subjects">Subjects</label>
-    <input type="text" class="form-control" name="subjects" placeholder="Enter Student subjects">
+    <select class="form-control" name="subject_id">
+      <option value="">----Select a Subject----</option>
+      @foreach($subjects as $subject)
+      <option value="{{$subject->id}}">{{$subject->name}}</option>
+@endforeach
+
+    </select>
   </div>
 
   

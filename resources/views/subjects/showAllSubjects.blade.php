@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>All Students</title>
+    <title>All Subjects</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -17,44 +17,22 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Subject</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" action="{{route('updateStudent')}}">
+        <form method="post" action="{{route('updateSubject')}}">
 
     @csrf
 
 
   <div class="form-group">
-    <label for="name">Student Name</label>
+    <label for="name">Subject Name</label>
     <input type="text" class="form-control" id="id" name="id" hidden>
 
-    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Student Name">
+    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Subject Name">
   </div>
-  <div class="form-group">
-    <label for="parent_name">Parent Name</label>
-    <input type="text" class="form-control" id="parent_name" name="parent_name" placeholder="Enter Parent Name">
-  </div>
-  <div class="form-group">
-    <label for="p_mobile_no">Parent Mobile No.</label>
-    <input type="number" class="form-control" id="p_mobile_no" name="p_mobile_no" placeholder="Enter Parent Mobile Number" maxlength="10">
-  </div>
-  <div class="form-group">
-    <label for="class">Class</label>
-    <input type="text" class="form-control" id="class" name="class" placeholder="Enter Student Class">
-  </div>
-  <div class="form-group">
-    <label for="subjects">Subjects</label>
-    <select class="form-control" id="subject_id" name="subject_id">
-      <option value="">----Select a Subject----</option>
-      @foreach($subjects as $subject)
-      <option value="{{$subject->id}}">{{$subject->name}}</option>
-@endforeach
-
-    </select>
-  </div>
-   {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+ 
    <div class="modal-footer form-actions">
          <button type="submit" class="btn btn-primary">
                             <i class="fa fa-check-square-o"></i> Save
@@ -128,24 +106,18 @@
       <th scope="col">ID</th>
       <th scope="col">Created At</th>
       <th scope="col">Name</th>
-      <th scope="col">Parent Name</th>
-      <th scope="col">Mobile No.</th>
-      <th scope="col">Class</th>
-      <th scope="col">Subjects</th>
+     
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($students as $student )
+    @foreach ($subjects as $subject )
     <tr>
-        <td>{{$student->id}}</td>
-        <td>{{$student->created_at}}</td>
-        <td>{{$student->name}}</td>
-        <td>{{$student->parent_name}}</td>
-        <td>{{$student->p_mobile_no}}</td>
-        <td>{{$student->class}}</td>
-        <td>{{$student->subject->name}}</td>
-        <td><a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="edit({{ $student->id }})" >EDIT</a> | <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="deletefn({{ $student->id }})">Delete</a></td>
+        <td>{{$subject->id}}</td>
+        <td>{{$subject->created_at}}</td>
+        <td>{{$subject->name}}</td>
+        
+        <td><a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="getsbj({{ $subject->id }})" >EDIT</a> | <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="deletefn({{ $subject->id }})">Delete</a></td>
     </tr>
    
         
@@ -162,25 +134,18 @@
 <!-- Modal -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  function edit(value) {
-        console.log(value);
-        var id = value;
+  function getsbj(id) {
+        console.log(id);
+        // var id = value;
         $.ajax({
         type: "GET",
-        url: '/studentedit/' + id,
+        url: '/getsbjid/' + id,
         success: function (data) {
         $("#myModal").trigger("reset");
-        console.log(data.result);
+        // console.log(data.result);
         
         $('#id').val(data.result.id);
         $('#name').val(data.result.name);
-        $('#parent_name').val(data.result.parent_name);
-        $('#p_mobile_no').val(data.result.p_mobile_no);
-        $('#class').val(data.result.class);
-        $('#subject_id').val(data.result.subject.id);
-        
-       
-        
         },
         error: function (error) {
         console.log('Error:', error);

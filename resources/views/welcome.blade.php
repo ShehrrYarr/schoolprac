@@ -15,7 +15,9 @@
 <!-- Button to trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
   Launch Modal
-</button>
+</button><br>
+
+    <a href="/addsubjectPaeg"><h1>Click Here to add Subjects</h1></a>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

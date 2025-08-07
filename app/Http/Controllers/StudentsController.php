@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\Students;
+use App\models\Subject;
+
 
 class StudentsController extends Controller
 {
     public function createStudentPage(){
-        return view('addStudentPage');
+        $subjects = Subject::all();
+        return view('addStudentPage',compact('subjects'));
     }
 
     public function storeStudent(Request $request){
@@ -28,7 +31,8 @@ class StudentsController extends Controller
         $student->parent_name = $request->parent_name;
         $student->p_mobile_no = $request->p_mobile_no;
         $student->class = $request->class;
-        $student->subjects = $request->subjects;
+        // $student->subjects = $request->subjects;
+        $student->subject_id = $request->subject_id;
         $student->save();
         return redirect()->route('showallstudents')->with('success','Student Added Successfully');
 
@@ -43,10 +47,17 @@ class StudentsController extends Controller
 
     public function showAllStudents(){
         // is variable me sary students store hen 
-        $students = Students::all();
+        $subjects= Subject::all();
+        // dd($subjects);
+        $students = Students::with('subject')->get();
+        // dd($students);
         
-        return view('showAllStudents',compact('students'));
+        return view('showAllStudents',compact('students','subjects'));
     }
+
+
+
+
 
     public function getStudentId($id){
 
@@ -56,14 +67,14 @@ class StudentsController extends Controller
     }
 
     public function updateStudent(Request $request){
-        // dd($request->all());
+        // dd($request->all()); 
 
         $student = Students::find($request->id);
         $student->name = $request->name;
         $student->parent_name = $request->parent_name;
         $student->p_mobile_no = $request->p_mobile_no;
         $student->class = $request->class;
-        $student->subjects = $request->subjects;
+        $student->subject_id = $request->subject_id;
         $student->save();
 
          return redirect()->back()->with('success','Student Updated Successfuly');
@@ -77,7 +88,7 @@ class StudentsController extends Controller
     }
 
     public function editAjex($id){
-        $student = Students::find($id);
+        $student = Students::with('subject')->find($id);
         if(!$student){
             return response()->json(['error' => 'Student not Found']);
         }

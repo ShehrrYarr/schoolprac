@@ -10,4 +10,10 @@ class Students extends Model
     use HasFactory;
 
     protected $guarded =[];
+
+    public function subject(){
+        return $this->belongsTo(Subject::class,'subject_id');
+    }
+
+    //Belongs to -> one to one relation 
 }
