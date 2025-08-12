@@ -2,7 +2,7 @@
 @section('content')
 
 
-
+<h1>Hi this is welcome page</h1>
 <h1>Main page </h1>
     <a href="/addstudent"><h1>Click Here to add students</h1></a>
 
