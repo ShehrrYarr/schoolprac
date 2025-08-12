@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('parent_name');  
             $table->integer('p_mobile_no');
-            $table->string('class');
+            // $table->string('class');
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
         });
     }

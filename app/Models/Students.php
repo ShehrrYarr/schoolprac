@@ -11,6 +11,14 @@ class Students extends Model
 
     protected $guarded =[];
 
+     public function classrooms()
+    {
+        return $this->belongsToMany(Classroom::class)
+                    ->withPivot(['assigned_at', 'is_active'])
+                    ->withTimestamps();
+    }
+
+
     public function subject(){
         return $this->belongsTo(Subject::class,'subject_id');
     }
