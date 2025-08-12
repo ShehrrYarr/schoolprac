@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add Student</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
+@extends('nav_bar')
+@section('content')
 
-    <h1>This is the student Form</h1>
+
+
+
+
+ <h1>This is the student Form</h1>
 
    
 
@@ -56,6 +52,9 @@
 </div>
 
 <a href="\showallstudents"><h1>Click here to view all students</h1></a>
-    
-</body>
-</html>
+
+
+
+
+
+@endsection
